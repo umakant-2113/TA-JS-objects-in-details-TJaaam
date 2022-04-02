@@ -120,7 +120,9 @@ s1.area;
 s2.area;
 
 // Check the `isEqual` method and pass the two instance you created above.
-Square.isEqual(s1,s2)
+let square21 = user.area=16
+let square22 = user.area=16
+Square.isEqual(square21,square22)
 
 //  Create a class named `User` that accepts `firstName` and `lastName` property
 
@@ -178,7 +180,7 @@ class User{
     }
     set fullName(name){
         let name =name.split(" ")
-        if(name.length < 5){
+        if(this.fullName.length < 5){
            alert(`Full name should be more than 5 characters`) 
         }else{
             let firstName=name.split(" ")[0]
