@@ -1,16 +1,16 @@
 console.log(this.document === document); // Output
-
+ true;
 // ------------
 
 console.log(this === window); //Output
-
+true;
 // ------------
 
 var myFunction = function () {
   console.log(this);
 };
 myFunction(); // Output
-
+// myFunction is return global object as window
 // ------------
 
 function f1() {
@@ -18,7 +18,8 @@ function f1() {
   return this;
 }
 console.log(f1() === window); //Output
-
+// when we use strict method then this is return undefined
+// return false
 // ------------
 
 function foo() {
@@ -27,7 +28,7 @@ function foo() {
 }
 
 foo(); //Output ??
-
+// true
 // ------------
 
 // This for IIFE
@@ -35,7 +36,7 @@ foo(); //Output ??
   console.log('Anonymous function invocation');
   console.log(this === window);
 })(); //Output
-
+//  true
 // ------------
 
 var myObject = {};
@@ -44,6 +45,8 @@ myObject.someMethod = function () {
 };
 myObject.someMethod(); //Value Of This
 
+
+// this is point to myObject why we call the function left side of function dot 
 // ------------
 
 function Person(fn, ln) {
@@ -57,9 +60,10 @@ function Person(fn, ln) {
 
 let person = new Person('John', 'Reed');
 person.displayName(); // Output
+name: "john read"
 let person2 = new Person('Paul', 'Adams');
 person2.displayName(); // Output
-
+name: "paul adams"
 // ------------
 
 function foo() {
@@ -77,10 +81,12 @@ let user = {
 };
 
 user.foo(); // Output
+// false
 let fun1 = user.foo1;
 fun1(); // Output ??
+// true
 user.foo1(); // Output ??
-
+// false
 // ------------
 
 this.x = 9;
@@ -92,13 +98,17 @@ var obj = {
 };
 
 obj.getX(); // Output ??
+// out put 81
 
 var retrieveX = obj.getX;
 retrieveX(); //Output ??
 
+// 9
+
 var boundGetX = retrieveX.bind(obj);
 boundGetX(); // Output ??
 
+// 81
 // ------------
 
 function Person(fn, ln) {
@@ -112,11 +122,13 @@ function Person(fn, ln) {
 
 let person = new Person('John', 'Reed');
 person.displayName(); // Output
+// name: john read
 let person2 = new Person('Paul', 'Adams');
 person2.displayName(); // Output
+// name : paul adams
 
 person.displayName.call(person2); // Output ??
-
+// person2 is not a object it is a instance of object;
 // ------------
 
 const a = {
@@ -133,21 +145,27 @@ obj.getThis4 = obj.getThis2.bind(obj);
 
 // Output
 obj.getThis();
+// when we use arrow function in jaava script then it is target to window object 
 
 // Output
 obj.getThis.call(a);
+// when we use arrow function in jaava script then it is target to window object 
 
 // Output
 obj.getThis2();
+// it  is a function expresion in java script so it is target to object 
 
 // Output
 obj.getThis2.call(a);
+// it is target to first object 
 
 // Output
 obj.getThis3();
+// not apply any method in arrow function 
 
 // Output
 obj.getThis4();
+// it is return to object 
 
 // -------------
 
@@ -159,10 +177,11 @@ let person = {
 };
 
 person.greet(); // output
-
+// "hello jay"
 let greet = person.greet;
 greet(); // output
 
+"hello"
 // -------------
 
 let name = 'Jay Global';
@@ -179,14 +198,19 @@ let person = {
   },
 };
 console.log(person.details.print()); // output?
+// jai details
 console.log(person.print()); // output?
 
+// jay person
 let name1 = person.print;
+
 let name2 = person.details;
 
-console.log(name1()); // output?
-console.log(name2.print()); // output?
 
+console.log(name1()); // output?
+// ""
+console.log(name2.print()); // output?
+// jai details
 // --------
 
 let outerFn = function () {
@@ -200,6 +224,7 @@ let outerFn = function () {
 };
 
 outerFn()();
+// innerIten has define inside of inner so we can not call outside of inner function;
 
 // -----------
 
@@ -240,6 +265,7 @@ function print() {
 let printNameBob = print.bind(bobObj);
 console.log(printNameBob()); // output??
 
+// bob
 // -------------------
 
 let obj1 = {
@@ -258,7 +284,7 @@ let obj2 = {
 
 let getSecondData = obj2.printSecondData.bind(obj1);
 console.log(getSecondData()); // Output and why ???
-
+// out put is 2
 // --------------
 
 const call = {
@@ -269,7 +295,7 @@ const call = {
 };
 
 call.says(); // output ???
-
+// Hey, mom just called.
 // -----------------
 
 const call = {
@@ -283,6 +309,7 @@ let newCall = call.says;
 
 newCall(); // output ???
 
+// Hey, undefined just called.
 //  -----------------
 
 function anotherCaller() {
@@ -300,3 +327,6 @@ const call = {
 let newCall = call.anotherCaller;
 
 newCall(); // output ??
+
+
+// undefined call too
