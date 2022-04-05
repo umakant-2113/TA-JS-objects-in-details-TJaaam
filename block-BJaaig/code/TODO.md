@@ -30,52 +30,52 @@ function MainUser() {
 let userSayHello = user.sayHello;
 
 console.log(user.sayHello()); // output / error
-hello john;
+// hello john;
 
 console.log(user2.sayHello()); // output / error
-hello Arya
+// hello Arya
 
 console.log(user.sayHello.call(user2)); // output / error
-hello Arya;
+// hello Arya;
 console.log(user.sayHello.call(user2, 'Hey'));
- hey Arya
+//  hey Arya
 console.log(user.sayHello.apply(user2, ['Hey']));
- hey Arya
+//  hey Arya
 console.log(typeof user.sayHello.bind(user2)); // output / error
-function
+// function
 
 console.log(user.sayHello.bind(user2)()); // output / error
-hello Arya
+// hello Arya
 
 console.log(userSayHello()); // output / error
-hello undefined
+// hello undefined
 
 console.log(typeof userSayHello.bind(user2));
- function
+//  function
 
 console.log(userSayHello.bind(user2)());
- hello Arya
+//  hello Arya
 console.log(user3.sayHello());
- sayHello function is not available in user 3
+//  sayHello function is not available in user 3
 
 console.log(userSayHello.apply(user3));
- hello bran
+//  hello bran
 console.log(userSayHello.call(user3))
-hello Bran
+// hello Bran
 console.log(typeof new MainUser()); 
-object
+// object
 console.log(typeof new MainUser()); 
-object
+// object
 // output / error
 console.log(new MainUser().sayHello());
- hello tyrion
+//  hello tyrion
 console.log(new MainUser().sayHello.call(user2));
- hello arya
+//  hello arya
 console.log(new MainUser().sayHello.call(user));
- hello john
+//  hello john
 console.log(
   new MainUser().sayHello.apply(user, ['Welcome!'])
 ); // output / error
 
-welcome john
+// welcome john
 ```
