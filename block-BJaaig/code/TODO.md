@@ -77,5 +77,6 @@ console.log(
   new MainUser().sayHello.apply(user, ['Welcome!'])
 ); // output / error
 
-// welcome john
+
+// output is // welcome john
 ```
