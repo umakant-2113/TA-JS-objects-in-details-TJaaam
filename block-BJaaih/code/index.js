@@ -3,18 +3,21 @@
 `myMap` will behave similar to how the `Array.map` works. To test the implementation use the code below.
 */
 
-// myMap function goes here
-
+function  myMap (cb){
+  let arr = []
+for(let i = 0; i<this.length; i++){
+arr.push(cb(this[i]))
+}
+  return arr
+}
+Object.setPrototypeOf(myMap,Array.prototype)
 // Test the myMap function you created above
-
+// Test the myMap function you created above
 let numbers = [1, 5, 6, 8, 9];
-let words = 'quick brown fox jumped over a lazy dog'.split(
-  ' '
-);
+let words = 'quick brown fox jumped over a lazy dog'.split(' ');
 let doubleNum = numbers.myMap(function (num) {
   return num * 2 - 1;
 });
-
 let capitalWords = words
   .myMap(function (word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -28,19 +31,29 @@ console.log(capitalWords); // it should be 'Quick Brown Fox Jumped Over A Lazy D
 After adding the function test it using the code below.
 */
 
-// You code goes here
-
+function myFilter(cb){
+  let arr=[];
+for(let i=0;this.length>i;i++){
+arr.push(cb(this[i]))
+}
+return arr;
+}
+Object.setPrototypeOf(myFilter,Array.prototype)
 let even = numbers.myFilter(function (num) {
-  return num % 2 === 0;
+  if (num % 2 === 0){
+      return num;
+  }
 });
 
 let filteredWords = words
   .myFilter(function (word) {
-    return word.length > 3;
+    if( word.length > 3){
+        return word;
+    };
   })
   .join(' ');
 console.log(even); // it should be [6, 8]
-console.log(filteredWords); // it should be 'quick brown jumped over lazy';
+console.log(filteredWords) // it should be 'quick brown jumped over lazy';
 
 /*
 3. Add a method named `shuffle` to Array.prototype. Using the method shuffle will return a
@@ -49,11 +62,14 @@ Make sure it does not the changes the original array.
 
 */
 
-// You code goes here
-
-// Test to check the shuffle method (It will return different output every time you call)
-console.log(numbers.shuffle());
-console.log(numbers.shuffle());
+Array.prototype.shuffle = function (){
+  return this.sort((a,b)=>Math.random - 0.5)
+  }
+    let number=[1,23,45,65]
+  // Test to check the shuffle method (It will return different output every time you call)
+  
+console.log(number.shuffle());
+console.log(number.shuffle());
 console.log(words.shuffle());
 console.log(words.shuffle());
 
@@ -63,7 +79,11 @@ new array and it should only contain unique elements in the array.
 Unique means no element should come multiple times.
 */
 
-// You code goes here
+Array.prototype.unique=function(){
+  let arr= new Set(this)
+  let value=Array.from(arr)
+    console.log(value)
+}
 
 // Test to check the shuffle method (It will return different output every time you call)
 let num = [1, 2, 3, 4, 2, 3, 6, 7, 7];
@@ -77,10 +97,18 @@ console.log(strings.unique()); // ['h', 'e', 'l', 'o', 'w', 'r', 'd']
 array that will contain only element that is common in both the array.
 */
 
-// You code goes here
+Array.prototype.intersection=function(array){
 
-// Test to check the shuffle method (It will return different output every time you call)
-console.log(num.intersection([2, 7, 11, 32])); // [2, 7]
+  let value = this.filter((elm)=>{
+      return array.includes(elm)
+    })
+    let value1 =  new Set(value)
+      return Array.from(value1)
+     
+  }
+  let numberInter = [1, 2, 3, 4, 2, 3, 6, 7, 7];
+  // Test to check the shuffle method (It will return different output every time you call)
+  console.log(num.intersection([2, 7, 11, 32])); // [2, 7]
 console.log(strings.intersection('heyworld'.split(''))); // ['h', 'e', 'o', 'w', 'r', 'l', 'd']
 
 /*
@@ -88,10 +116,25 @@ console.log(strings.intersection('heyworld'.split(''))); // ['h', 'e', 'o', 'w',
 and split the array into groups the length of size. If array can't be split evenly, the final
 chunk will be the remaining elements. `length` should default to 1.
 */
+Array.prototype.chunk=function(size){
+  let chunked=[];
+  if(size !==0){
+    for(let i=0;this.length>i;i+=size){
+      chunked.push(this.slice(i, i + size))
+        
+  }
+      return chunked
+}else if(size===0){
+  for(let i=0;this.length>i;i++){
+    chunked.push(this.slice(i,i+size))
+      
+}
+      return chunked
+}
+}
 
-// You code goes here
-
-// Test to check the shuffle method (It will return different output every time you call)
-console.log(num.chunk(2)); // [[1, 2], [3, 4], [2, 3], [6, 7], [7]]
-console.log(num.chunk()); // [[1], [2], [3], [4], [2], [3], [6], [7], [7]]
-console.log(strings.chunk(3)); // [['h', 'e', 'l'], ['l', 'o', 'w'], ['o', 'r', 'l'], ['d']]
+let numChunk = [1, 2, 3, 4, 2, 3, 6, 7, 7];
+let string ="hello World".split("")
+console.log(numChunk.chunk(2)); // [[1, 2], [3, 4], [2, 3], [6, 7], [7]]
+console.log(numChunk.chunk()); // [[1], [2], [3], [4], [2], [3], [6], [7], [7]]
+console.log(string.chunk(3)); // [['h', 'e', 'l'], ['l', 'o', 'w'], ['o', 'r', 'l'], ['d']]
