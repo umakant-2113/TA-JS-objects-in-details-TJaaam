@@ -1,15 +1,14 @@
 class BookList{
-    constructor(title,category,author,isRead,finishedDate){
+    constructor(title,category,author){
         this.title=title;
         this.category=category;
         this.author=author;
-        this.isRead=isRead;
-        this.finishedDate=finishedDate;
+        this.isRead=false;
+        this.finishedDate=null;
     }
     markBookAsRead(){
-        if(this.isRead===true){
-            this.finishedDate=Date.now()
-        }
+        this.isRead=true;
+        this.finishedDate=Date.now()
     }
 }
 
@@ -17,26 +16,27 @@ class BookList{
 
 
 class Book{
-    constructor(allBooks,booksIndex){
-    this.allBooks=allBooks;
-    this.booksIndex = booksIndex
+    constructor(){
+    this.allBooks=[];
+    this.booksIndex = 0
     }
-    add(book){
-        this.allBooks=allBooks.push(book)
+    add(book=[]){
+        this.allBooks=allBooks.concat(book)
         return this.allBooks;
     }
     getCurrentBook(index){
-        if(this.allBooks.length>index) return this.allBooks[index]
-
+       return  this.allBooks[this.booksIndex]
     }
     getNextBook(){
-        if(this.allBooks.length>index) return this.allBooks[index+1]  
+        this.booksIndex=this.booksIndex+1 
+        return  this.allBooks[this.booksIndex] 
     }
     getPrevBook(){
-        if(this.allBooks.length>index) return this.allBooks[index-1]  
+        this.booksIndex=this.booksIndex - 1; 
+        return  this.allBooks[this.booksIndex] 
     }
     changeCurrentBook(value){
-        this.allBooks=this.allBooks.shift(value)
-        return this.allBooks;
+        this.booksIndex=value;
+        return this.allBooks[this.booksIndex]
     }
 }
